@@ -16,6 +16,10 @@ export const updateUserStatus = (id, status) => {
   return request.put(`/users/${id}/status`, { status })
 }
 
+export const deleteUser = (id) => {
+  return request.delete(`/users/${id}`)
+}
+
 export const updatePassword = (id, data) => {
   return request.put(`/users/${id}/password`, data)
 }
@@ -23,4 +27,3 @@ export const updatePassword = (id, data) => {
 export const getUserStats = (id) => {
   return request.get(`/users/${id}/stats`)
 }
-

@@ -43,12 +43,13 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="150" fixed="right">
+        <el-table-column label="操作" width="220" fixed="right">
           <template #default="{ row }">
             <el-button size="small" @click="handleEdit(row)">编辑</el-button>
             <el-button size="small" :type="row.status === 1 ? 'danger' : 'success'" @click="handleStatus(row)">
               {{ row.status === 1 ? '禁用' : '启用' }}
             </el-button>
+            <el-button size="small" type="danger" @click="handleDelete(row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -77,7 +78,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { getUserList, updateUser, updateUserStatus } from '@/api/user'
+import { getUserList, updateUser, updateUserStatus, deleteUser } from '@/api/user'
 
 const users = ref([])
 const showDialog = ref(false)
@@ -133,6 +134,23 @@ const handleStatus = async (row) => {
     })
     await updateUserStatus(row.id, newStatus)
     ElMessage.success(`${action}成功`)
+    loadUsers()
+  } catch (error) {
+    if (error !== 'cancel') {
+      console.error(error)
+    }
+  }
+}
+
+const handleDelete = async (row) => {
+  try {
+    await ElMessageBox.confirm(`确定要删除用户「${row.name}」吗? 删除后不可恢复`, '提示', {
+      confirmButtonText: '确定删除',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+    await deleteUser(row.id)
+    ElMessage.success('删除成功')
     loadUsers()
   } catch (error) {
     if (error !== 'cancel') {

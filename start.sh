@@ -95,6 +95,11 @@ start_backend() {
     return 0
   fi
 
+  if command_exists python3 && [ -f "$ROOT_DIR/clean_macos_junk.py" ]; then
+    log "cleaning macOS metadata before backend start"
+    python3 "$ROOT_DIR/clean_macos_junk.py" "$BACKEND_DIR" --delete >/dev/null || true
+  fi
+
   log "starting backend on port $BACKEND_PORT"
   (
     cd "$BACKEND_DIR"

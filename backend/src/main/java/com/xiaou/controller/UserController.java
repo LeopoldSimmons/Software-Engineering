@@ -74,6 +74,26 @@ public class UserController {
         return Result.success();
     }
 
+    @DeleteMapping("/{id}")
+    public Result<?> delete(@PathVariable Long id,
+                            @RequestAttribute Long userId,
+                            @RequestAttribute String role) {
+        if (!"ADMIN".equals(role)) {
+            return Result.error(403, "无权删除用户");
+        }
+        if (id.equals(userId)) {
+            return Result.error("不能删除当前登录用户");
+        }
+
+        User user = userService.getById(id);
+        if (user == null) {
+            return Result.error("用户不存在");
+        }
+
+        userService.removeById(id);
+        return Result.success();
+    }
+
     @PutMapping("/{id}/password")
     public Result<?> updatePassword(@PathVariable Long id, 
                                    @RequestBody Map<String, String> params,
@@ -113,4 +133,3 @@ public class UserController {
         return Result.success(stats);
     }
 }
-
