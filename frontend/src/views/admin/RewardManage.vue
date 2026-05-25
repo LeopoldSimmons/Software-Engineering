@@ -10,7 +10,7 @@
         <el-table-column prop="description" label="商品描述" />
         <el-table-column prop="points" label="所需积分" width="120">
           <template #default="{ row }">
-            <span style="color: #409eff; font-weight: bold">{{ row.points }}</span>
+            <span class="points-value">{{ row.points }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="stock" label="库存" width="100" />
@@ -143,3 +143,9 @@ onMounted(() => {
 })
 </script>
 
+<style scoped>
+.points-value {
+  color: #0fa0ae;
+  font-weight: 800;
+}
+</style>

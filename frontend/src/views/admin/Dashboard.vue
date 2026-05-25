@@ -1,8 +1,15 @@
 <template>
-  <div>
+  <div class="dashboard-page">
+    <div class="page-head">
+      <div>
+        <h2>数据概览</h2>
+        <p>快速查看平台运行状态</p>
+      </div>
+    </div>
+
     <el-row :gutter="20">
-      <el-col :span="8">
-        <el-card>
+      <el-col :xs="24" :md="8">
+        <el-card class="stat-card users">
           <el-statistic title="总用户数" :value="stats.totalUsers">
             <template #prefix>
               <el-icon><User /></el-icon>
@@ -10,8 +17,8 @@
           </el-statistic>
         </el-card>
       </el-col>
-      <el-col :span="8">
-        <el-card>
+      <el-col :xs="24" :md="8">
+        <el-card class="stat-card activities">
           <el-statistic title="总活动数" :value="stats.totalActivities">
             <template #prefix>
               <el-icon><Trophy /></el-icon>
@@ -19,8 +26,8 @@
           </el-statistic>
         </el-card>
       </el-col>
-      <el-col :span="8">
-        <el-card>
+      <el-col :xs="24" :md="8">
+        <el-card class="stat-card hours">
           <el-statistic title="总志愿时长(小时)" :value="stats.totalVolunteerHours" :precision="1">
             <template #prefix>
               <el-icon><Timer /></el-icon>
@@ -80,3 +87,63 @@ onMounted(() => {
 })
 </script>
 
+<style scoped>
+.dashboard-page {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.page-head {
+  margin-bottom: 18px;
+}
+
+.page-head h2 {
+  margin: 0 0 6px;
+  font-size: 28px;
+}
+
+.page-head p {
+  margin: 0;
+  color: #6c7a89;
+}
+
+.stat-card {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.stat-card :deep(.el-card__body) {
+  position: relative;
+  min-height: 130px;
+  padding: 26px;
+}
+
+.stat-card :deep(.el-statistic__head) {
+  color: #637a88;
+  font-weight: 650;
+}
+
+.stat-card :deep(.el-statistic__content) {
+  color: #263f4c;
+}
+
+.stat-card :deep(.el-statistic__prefix) {
+  color: #0fa0ae;
+}
+
+.stat-card.users {
+  background: linear-gradient(135deg, #fff 0%, #e8fbfd 100%);
+}
+
+.stat-card.activities {
+  background: linear-gradient(135deg, #fff 0%, #fff3cb 100%);
+}
+
+.stat-card.hours {
+  background: linear-gradient(135deg, #fff 0%, #eaffef 100%);
+}
+
+h3 {
+  margin: 0;
+}
+</style>

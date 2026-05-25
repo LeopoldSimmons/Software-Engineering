@@ -1,7 +1,15 @@
 <template>
-  <div>
+  <div class="rewards-page">
+    <div class="page-head">
+      <div>
+        <h2>积分商城</h2>
+        <p>用志愿积分兑换心仪好礼</p>
+      </div>
+      <el-tag type="warning" effect="light">{{ userStore.userInfo.availablePoints || 0 }} 可用积分</el-tag>
+    </div>
+
     <el-row :gutter="20">
-      <el-col :span="6" v-for="reward in rewards" :key="reward.id">
+      <el-col :xs="24" :sm="12" :lg="6" v-for="reward in rewards" :key="reward.id">
         <el-card class="reward-card" shadow="hover">
           <div class="reward-image">
             <el-icon :size="80"><Present /></el-icon>
@@ -26,7 +34,7 @@
           <span>{{ currentReward.name }}</span>
         </el-form-item>
         <el-form-item label="所需积分">
-          <span style="color: #409eff; font-weight: bold">{{ currentReward.points }} 积分</span>
+          <span class="points-value">{{ currentReward.points }} 积分</span>
         </el-form-item>
         <el-form-item label="联系电话">
           <el-input v-model="form.phone" />
@@ -109,23 +117,59 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.rewards-page {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.page-head h2 {
+  margin: 0 0 6px;
+  font-size: 28px;
+}
+
+.page-head p {
+  margin: 0;
+  color: #6c7a89;
+}
+
 .reward-card {
   margin-bottom: 20px;
   text-align: center;
+  min-height: 330px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reward-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(53, 158, 169, 0.18);
 }
 
 .reward-image {
-  padding: 20px;
-  color: #409eff;
+  display: grid;
+  place-items: center;
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 12px;
+  border-radius: 8px;
+  color: #0fa0ae;
+  background: linear-gradient(135deg, #e3fbfd 0%, #fff2bf 100%);
 }
 
 .reward-card h3 {
   margin: 10px 0;
-  color: #303133;
+  color: #27384a;
 }
 
 .description {
-  color: #606266;
+  color: #667888;
   margin: 10px 0;
   min-height: 40px;
   font-size: 14px;
@@ -136,15 +180,26 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  color: #409eff;
+  color: #0fa0ae;
   font-weight: bold;
   font-size: 18px;
   margin: 10px 0;
 }
 
+.points-value {
+  color: #0fa0ae;
+  font-weight: 800;
+}
+
 .stock {
-  color: #909399;
+  color: #7a8b98;
   font-size: 14px;
 }
-</style>
 
+@media (max-width: 640px) {
+  .page-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>

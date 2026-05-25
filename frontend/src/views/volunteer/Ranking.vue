@@ -16,7 +16,7 @@
         <el-table-column prop="name" label="志愿者" />
         <el-table-column prop="totalPoints" label="总积分" width="150">
           <template #default="{ row }">
-            <span style="color: #409eff; font-weight: bold">{{ row.totalPoints }}</span>
+            <span class="points-value">{{ row.totalPoints }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="volunteerHours" label="志愿时长(小时)" width="180">
@@ -45,3 +45,13 @@ onMounted(() => {
 })
 </script>
 
+<style scoped>
+.points-value {
+  color: #0fa0ae;
+  font-weight: 800;
+}
+
+h3 {
+  margin: 0;
+}
+</style>

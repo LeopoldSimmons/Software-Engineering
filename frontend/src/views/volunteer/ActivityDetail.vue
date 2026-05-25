@@ -15,7 +15,7 @@
         <el-descriptions-item label="开始时间">{{ activity.startTime }}</el-descriptions-item>
         <el-descriptions-item label="结束时间">{{ activity.endTime }}</el-descriptions-item>
         <el-descriptions-item label="活动积分">
-          <span style="color: #409eff; font-weight: bold">{{ activity.points }} 积分</span>
+          <span class="points-value">{{ activity.points }} 积分</span>
         </el-descriptions-item>
         <el-descriptions-item label="志愿时长">{{ activity.hours }} 小时</el-descriptions-item>
         <el-descriptions-item label="参与人数">
@@ -150,3 +150,9 @@ onMounted(() => {
 })
 </script>
 
+<style scoped>
+.points-value {
+  color: #0fa0ae;
+  font-weight: 800;
+}
+</style>

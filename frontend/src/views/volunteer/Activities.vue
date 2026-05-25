@@ -1,6 +1,14 @@
 <template>
-  <div>
-    <el-card>
+  <div class="activities-page">
+    <div class="page-head">
+      <div>
+        <h2>活动大厅</h2>
+        <p>发现适合自己的志愿活动</p>
+      </div>
+      <el-tag type="success" effect="light">公益同行</el-tag>
+    </div>
+
+    <el-card class="search-card">
       <el-form :inline="true" :model="searchForm">
         <el-form-item label="活动状态">
           <el-select v-model="searchForm.status" placeholder="全部" clearable style="width: 150px">
@@ -18,9 +26,17 @@
       </el-form>
     </el-card>
 
-    <el-row :gutter="20" style="margin-top: 20px">
-      <el-col :span="8" v-for="activity in activities" :key="activity.id">
+    <el-row :gutter="20" class="activity-grid">
+      <el-col :xs="24" :sm="12" :lg="8" v-for="activity in activities" :key="activity.id">
         <el-card class="activity-card" shadow="hover">
+          <div class="activity-top">
+            <div class="activity-icon">
+              <el-icon><Flag /></el-icon>
+            </div>
+            <el-tag :type="getStatusType(activity.status)" size="small">
+              {{ getStatusText(activity.status) }}
+            </el-tag>
+          </div>
           <h3>{{ activity.title }}</h3>
           <p class="description">{{ activity.description }}</p>
           <div class="info-item">
@@ -37,16 +53,13 @@
           </div>
           <div class="info-item">
             <el-icon><Coin /></el-icon>
-            <span style="color: #409eff; font-weight: bold">{{ activity.points }} 积分</span>
+            <span class="points-text">{{ activity.points }} 积分</span>
           </div>
           <div class="info-item">
             <el-icon><Timer /></el-icon>
             <span>{{ activity.hours }} 小时</span>
           </div>
-          <el-tag :type="getStatusType(activity.status)" size="small">
-            {{ getStatusText(activity.status) }}
-          </el-tag>
-          <div style="margin-top: 15px">
+          <div class="card-actions">
             <el-button type="primary" size="small" @click="viewDetail(activity.id)">查看详情</el-button>
           </div>
         </el-card>
@@ -118,18 +131,75 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.activities-page {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.page-head h2 {
+  margin: 0 0 6px;
+  font-size: 28px;
+}
+
+.page-head p {
+  margin: 0;
+  color: #6c7a89;
+}
+
+.search-card {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.activity-grid {
+  margin-top: 20px;
+}
+
 .activity-card {
   margin-bottom: 20px;
+  min-height: 315px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(53, 158, 169, 0.18);
+}
+
+.activity-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.activity-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  color: #0f8d9a;
+  background: linear-gradient(135deg, #e6fbfd 0%, #fff3c7 100%);
 }
 
 .activity-card h3 {
   margin: 0 0 10px 0;
-  color: #303133;
+  color: #27384a;
+  font-size: 18px;
 }
 
 .description {
-  color: #606266;
+  color: #667888;
   margin: 10px 0;
+  min-height: 42px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -141,8 +211,27 @@ onMounted(() => {
   align-items: center;
   gap: 8px;
   margin: 8px 0;
-  color: #606266;
+  color: #58707c;
   font-size: 14px;
 }
-</style>
 
+.info-item .el-icon {
+  color: #18aeba;
+}
+
+.points-text {
+  color: #0fa0ae;
+  font-weight: 800;
+}
+
+.card-actions {
+  margin-top: 15px;
+}
+
+@media (max-width: 640px) {
+  .page-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>

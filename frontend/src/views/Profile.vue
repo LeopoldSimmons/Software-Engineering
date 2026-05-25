@@ -18,13 +18,13 @@
           <el-tag>{{ form.role === 'ADMIN' ? '管理员' : '志愿者' }}</el-tag>
         </el-form-item>
         <el-form-item v-if="form.role === 'VOLUNTEER'" label="总积分">
-          <span style="color: #409eff; font-weight: bold">{{ form.totalPoints }}</span>
+          <span class="metric primary">{{ form.totalPoints }}</span>
         </el-form-item>
         <el-form-item v-if="form.role === 'VOLUNTEER'" label="可用积分">
-          <span style="color: #67c23a; font-weight: bold">{{ form.availablePoints }}</span>
+          <span class="metric success">{{ form.availablePoints }}</span>
         </el-form-item>
         <el-form-item v-if="form.role === 'VOLUNTEER'" label="志愿时长">
-          <span style="color: #e6a23c; font-weight: bold">{{ form.volunteerHours }} 小时</span>
+          <span class="metric warning">{{ form.volunteerHours }} 小时</span>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleUpdate">保存</el-button>
@@ -143,6 +143,26 @@ onMounted(() => {
 <style scoped>
 .profile-container {
   max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-container :deep(.el-card__header h3) {
+  margin: 0;
+}
+
+.metric {
+  font-weight: 800;
+}
+
+.metric.primary {
+  color: #0fa0ae;
+}
+
+.metric.success {
+  color: #35a96b;
+}
+
+.metric.warning {
+  color: #e29a20;
 }
 </style>
-

@@ -3,6 +3,9 @@
     <el-card class="login-card">
       <template #header>
         <div class="card-header">
+          <div class="brand-badge">
+            <el-icon><Sunrise /></el-icon>
+          </div>
           <h2>志愿活动管理平台</h2>
           <p>登录</p>
         </div>
@@ -75,36 +78,55 @@ const handleLogin = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 235, 158, 0.82) 0%, rgba(218, 250, 255, 0.96) 46%, rgba(226, 255, 232, 0.9) 100%);
 }
 
 .login-card {
-  width: 400px;
+  width: min(420px, 100%);
+  border: 1px solid rgba(80, 200, 208, 0.28);
+  box-shadow: 0 24px 60px rgba(54, 163, 174, 0.18);
 }
 
 .card-header {
   text-align: center;
 }
 
+.brand-badge {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 28px;
+  background: linear-gradient(135deg, #ffca4f 0%, #16c7d7 100%);
+  box-shadow: 0 12px 24px rgba(21, 184, 200, 0.22);
+}
+
 .card-header h2 {
   margin: 0 0 10px 0;
-  color: #303133;
+  color: #244858;
+  font-size: 25px;
 }
 
 .card-header p {
   margin: 0;
-  color: #909399;
+  color: #71909b;
   font-size: 14px;
 }
 
 .register-link {
   text-align: center;
   font-size: 14px;
-  color: #606266;
+  color: #617888;
 }
 
 .register-link a {
-  color: #409eff;
+  color: #0fa0ae;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -112,4 +134,3 @@ const handleLogin = async () => {
   text-decoration: underline;
 }
 </style>
-
